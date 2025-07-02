@@ -1,10 +1,6 @@
 # MediConnect 🏥
 > Django-powered healthcare management platform for modern telemedicine
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Django 4.2+](https://img.shields.io/badge/django-4.2+-green.svg)](https://www.djangoproject.com/)
-[![PostgreSQL](https://img.shields.io/badge/postgresql-13+-blue.svg)](https://www.postgresql.org/)
-[![Private Repository](https://img.shields.io/badge/Repository-Private-red.svg)](https://github.com)
 
 ## 🌟 Overview
 
