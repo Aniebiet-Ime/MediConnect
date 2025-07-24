@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Register | MediConnect{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="mb-4 text-center">Create an Account</h3>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          {% for field in form %}
+            <div class="mb-3">
+              {{ field.label_tag }}
+              {{ field }}
+              {{ field.errors }}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-success w-100">Register</button>
+        </form>
+        <div class="mt-3 text-center">
+          <span>Already have an account? <a href="{% url 'accounts:login' %}">Login</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

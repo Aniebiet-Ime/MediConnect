@@ -1,0 +1,13 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Provider Dashboard | MediConnect{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-4">Welcome, Dr. {{ user.get_full_name|default:user.email }}!</h2>
+      <p>This is your provider dashboard. Here you can manage your profile, appointments, and more.</p>
+      <a href="{% url 'accounts:profile' %}" class="btn btn-primary">View Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %} 
