@@ -1,0 +1,66 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Weekly Schedule</h2>
+
+    <div class="mb-4">
+        <form method="get" class="form-inline">
+            <div class="form-group mr-2">
+                <label for="start_date" class="mr-2">Week Starting:</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" 
+                       value="{{ start_date|date:'Y-m-d' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">View Schedule</button>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    {% for day in "0123456"|make_list %}
+                    {% with day_date=start_date|date:'Y-m-d'|add:day %}
+                    <th>{{ day_date|date:"D, M d" }}</th>
+                    {% endwith %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for hour in "9,10,11,12,13,14,15,16"|split:"," %}
+                <tr>
+                    <td>{{ hour }}:00</td>
+                    {% for day in "0123456"|make_list %}
+                    {% with day_date=start_date|date:'Y-m-d'|add:day %}
+                    <td>
+                        {% for appointment in appointments %}
+                        {% if appointment.date|date:'Y-m-d' == day_date and appointment.time|time:'H' == hour %}
+                        <div class="appointment-slot">
+                            <strong>{{ appointment.patient.get_full_name }}</strong><br>
+                            {{ appointment.get_appointment_type_display }}<br>
+                            <small>{{ appointment.time|time:"H:i" }}</small>
+                            <a href="{% url 'appointments:appointment_detail' appointment.pk %}" 
+                               class="btn btn-sm btn-info">View</a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    {% endwith %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+.appointment-slot {
+    background-color: #e3f2fd;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 2px 0;
+}
+</style>
+{% endblock %}

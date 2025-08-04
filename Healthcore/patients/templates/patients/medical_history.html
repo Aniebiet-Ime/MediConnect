@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Medical History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Medical History</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5>Medical Conditions</h5>
+                        <p>{{ patient.medical_conditions|linebreaks }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Current Medications</h5>
+                        <p>{{ patient.current_medications|linebreaks }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Allergies</h5>
+                        <p>{{ patient.allergies|linebreaks }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Medical History</h5>
+                        <p>{{ patient.medical_history|linebreaks }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Insurance Information</h5>
+                        <p><strong>Provider:</strong> {{ patient.insurance_provider }}</p>
+                        <p><strong>Policy Number:</strong> {{ patient.insurance_policy_number }}</p>
+                    </div>
+
+                    <a href="{% url 'patients:profile' %}" class="btn btn-primary">Back to Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

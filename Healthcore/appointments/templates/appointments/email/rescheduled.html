@@ -1,0 +1,22 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h2>Appointment Rescheduled</h2>
+<p>Dear {{ patient_name }},</p>
+
+<p>Your appointment has been successfully rescheduled.</p>
+
+<div class="appointment-details">
+    <h4>New Appointment Time:</h4>
+    <p><strong>Provider:</strong> {{ provider_name }}</p>
+    <p><strong>Date:</strong> {{ appointment_date }}</p>
+    <p><strong>Time:</strong> {{ appointment_time }}</p>
+    <p><strong>Type:</strong> {{ appointment.get_appointment_type_display }}</p>
+</div>
+
+<p>Please make sure to update your calendar with the new appointment time.</p>
+
+<p>If you need to make any changes, please contact us at least 24 hours before your appointment.</p>
+
+<p>Thank you for choosing MediConnect!</p>
+{% endblock %}

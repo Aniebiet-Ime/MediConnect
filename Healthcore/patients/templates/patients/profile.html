@@ -1,0 +1,56 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Patient Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Patient Information</h4>
+                </div>
+                <div class="card-body">
+                    <h5>{{ patient.user.get_full_name }}</h5>
+                    <p><strong>Age:</strong> {{ age }} years</p>
+                    <p><strong>Gender:</strong> {{ patient.get_gender_display }}</p>
+                    {% if patient.blood_type %}
+                    <p><strong>Blood Type:</strong> {{ patient.blood_type }}</p>
+                    {% endif %}
+                    {% if bmi %}
+                    <p><strong>BMI:</strong> {{ bmi }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Contact Information</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Phone:</strong> {{ patient.phone_number }}</p>
+                    <p><strong>Address:</strong> {{ patient.address }}</p>
+                    <p><strong>Emergency Contact:</strong> {{ patient.emergency_contact_name }}</p>
+                    <p><strong>Emergency Phone:</strong> {{ patient.emergency_contact_phone }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Update Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

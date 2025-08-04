@@ -1,0 +1,25 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h2>Appointment Reminder</h2>
+<p>Dear {{ patient_name }},</p>
+
+<p>This is a reminder of your upcoming appointment with {{ provider_name }}.</p>
+
+<div class="appointment-details">
+    <p><strong>Date:</strong> {{ appointment_date }}</p>
+    <p><strong>Time:</strong> {{ appointment_time }}</p>
+    <p><strong>Type:</strong> {{ appointment.get_appointment_type_display }}</p>
+</div>
+
+<p>Please remember to:</p>
+<ul>
+    <li>Arrive 10 minutes early</li>
+    <li>Bring any relevant medical records or test results</li>
+    <li>Have your insurance information ready (if applicable)</li>
+</ul>
+
+<p>If you need to cancel or reschedule, please do so as soon as possible.</p>
+
+<p>Thank you for choosing MediConnect!</p>
+{% endblock %}

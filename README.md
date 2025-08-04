@@ -202,15 +202,14 @@ Full API documentation is available at `/api/docs/` (when `DEBUG=True`).
 ### Production Setup
 
 1. **Install production dependencies**
-   ```bash
+   bash
    pip install gunicorn
-   ```
+   
 
 2. **Collect static files**
-   ```bash
+   bash
    python manage.py collectstatic
-   ```
-
+   
 3. **Run with Gunicorn**
    ```bash
    gunicorn mediconnect.wsgi:application

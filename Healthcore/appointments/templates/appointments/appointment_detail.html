@@ -1,0 +1,69 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Appointment Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Basic Information</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Date:</th>
+                            <td>{{ appointment.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Time:</th>
+                            <td>{{ appointment.time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type:</th>
+                            <td>{{ appointment.get_appointment_type_display }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td><span class="badge {% if appointment.status == 'SCHEDULED' %}bg-success{% elif appointment.status == 'CANCELLED' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                {{ appointment.get_status_display }}
+                            </span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h4>Participant Information</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Patient:</th>
+                            <td>{{ appointment.patient.get_full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Provider:</th>
+                            <td>{{ appointment.provider.user.get_full_name }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <h4>Reason for Visit</h4>
+                <p>{{ appointment.reason }}</p>
+            </div>
+
+            {% if appointment.notes %}
+            <div class="mt-4">
+                <h4>Notes</h4>
+                <p>{{ appointment.notes }}</p>
+            </div>
+            {% endif %}
+
+            {% if appointment.status == 'SCHEDULED' %}
+            <div class="mt-4">
+                <a href="{% url 'appointments:cancel_appointment' appointment.pk %}" class="btn btn-danger">Cancel Appointment</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
